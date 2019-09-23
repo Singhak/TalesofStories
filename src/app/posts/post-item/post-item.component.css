@@ -1,0 +1,30 @@
+img {
+    max-width: 100px;
+}
+
+.span4 img {
+    margin-right: 10px;
+}
+
+.span4 .img-left {
+    float: left;
+}
+
+.span4 .img-right {
+    float: right;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+span.subheading {
+    font-size: 18px;
+}
+
+span.small {
+    font-size: 14px;
+    display: block;
+    float: right;
+    font-style: oblique;
+}

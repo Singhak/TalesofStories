@@ -1,0 +1,18 @@
+<header class="intro-header" [style.background-image]="'url(' + img + ')'" style="max-height: 500px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>{{heading}}</h1>
+                    <hr class="small">
+                    <span class="subheading">{{subheading}}</span>
+                    <span class="meta" *ngIf="author">Posted by <a href={{social}}
+                            style="color: greenyellow">{{author}}</a> on
+                        {{date|date}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Image by <a href="https://pixabay.com/users/Bru-nO-1161770/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2163258">Bruno Glätsch</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2163258">Pixabay</a> -->
