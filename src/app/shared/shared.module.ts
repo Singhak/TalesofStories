@@ -1,3 +1,4 @@
+import { LoadingComponent } from './loading-component/loading.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
 import { TrunkTextPipe } from './trunk-text';
@@ -12,7 +13,7 @@ import { SubheaderComponent } from './../header/subheader/subheader.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 @NgModule({
-    declarations: [SubheaderComponent, TrunkTextPipe, FilterPipe],
+    declarations: [SubheaderComponent, TrunkTextPipe, FilterPipe, LoadingComponent],
     imports: [CommonModule, MarkdownModule.forRoot({
         markedOptions: {
             provide: MarkedOptions,
@@ -42,6 +43,7 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
         AngularFireModule,
         AngularFireDatabaseModule,
         AngularFirestoreModule,
+        LoadingComponent
     ],
 })
 export class SharedModule { }

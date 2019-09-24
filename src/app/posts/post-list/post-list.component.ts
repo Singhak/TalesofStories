@@ -1,6 +1,7 @@
 import { PostService } from './../post.service';
 import { Post } from './../post.model';
 import { Component, OnInit } from '@angular/core';
+import { isError } from 'util';
 
 @Component({
   selector: 'app-post-list',
@@ -10,28 +11,24 @@ import { Component, OnInit } from '@angular/core';
 export class PostListComponent implements OnInit {
 
   posts: Post[];
+  isLoading = false;
+  isErrorAlert = false;
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    // this.posts = this._postService.getPosts();
-    this.getPosts();
+    this.isLoading = true;
+    this.postService.getPosts();
+    this.postService.postNotification.subscribe((posts) => {
+      this.isLoading = false;
+      this.posts = posts;
+      if (!this.posts.length) {
+        this.isErrorAlert = true;
+      }
+    });
   }
 
-  getPosts() {
-    this.postService.getPosts()
-      .subscribe(data => {
-
-        this.posts = data.map(e => {
-          return {
-            id: e.payload.doc.id,
-            isEdit: false,
-            content: e.payload.doc.data().content,
-            subtitle: e.payload.doc.data().subtitle,
-            postDate: e.payload.doc.data().postDate,
-            title: e.payload.doc.data().title
-          };
-        });
-      });
+  onClose() {
+    this.isErrorAlert = false;
   }
 }
 

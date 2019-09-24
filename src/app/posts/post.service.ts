@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { Post } from './post.model';
+import { PostDataStorageService } from './post-data-storage.service';
 
-import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @Injectable({
     providedIn: 'root'
@@ -95,16 +96,27 @@ export class PostService {
         },
     ];
 
-    constructor(private firestore: AngularFirestore) { }
+    constructor(private postDataService: PostDataStorageService) { }
 
     getPost(id: number): Post {
         return this.posts[id];
     }
-    _getPosts(): Post[] {
-        return this.posts.slice();
+    getPosts() {
+        this.postDataService.getPosts().subscribe((res) => {
+            this.posts = res.map((rawPost) => {
+                return {
+                    id: rawPost.payload.doc.id,
+                    content: rawPost.payload.doc.data().content,
+                    subtitle: rawPost.payload.doc.data().subtitle,
+                    postDate: rawPost.payload.doc.data().postDate,
+                    title: rawPost.payload.doc.data().title,
+                    author: rawPost.payload.doc.data().author,
+                    category: rawPost.payload.doc.data().category
+                };
+            });
+            this.postNotification.next(this.posts.slice());
+        });
     }
-
-
 
     addNewPost(post: Post) {
         this.posts.push(post);
@@ -125,38 +137,5 @@ export class PostService {
         console.log(posts);
         this.posts = posts;
         this.postNotification.next(this.posts.slice());
-    }
-    ///
-
-    createPost(data) {
-        console.log('Create Post: ', data);
-
-        return this.firestore.collection('Posts').add(data);
-        // return new Promise<any>((resolve, reject) => {
-        //     this.firestore
-        //         .collection('posts')
-        //         .add(data)
-        //         .then(res => { }, err => reject(err));
-        // });
-    }
-
-    getPosts() {
-        return this.firestore.collection('Posts').snapshotChanges();
-    }
-
-    // tslint:disable: adjacent-overload-signatures
-    _updatePost(data) {
-        // this.firestore.doc('Students/' + recordID).update(record);
-        return this.firestore
-            .collection('Posts')
-            .doc(data.payload.doc.id)
-            .set({ completed: true }, { merge: true });
-    }
-
-    deleteCoffeeOrder(recordId) {
-        return this.firestore
-            .collection('Posts')
-            .doc(recordId)
-            .delete();
     }
 }

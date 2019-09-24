@@ -11,4 +11,13 @@
             </app-post-item>
         </div>
     </div>
+    <div class="loading">
+        <app-loading *ngIf="isLoading"></app-loading>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="isErrorAlert">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" (click)="onClose()">&times;</button>
+        <strong>Error</strong> Some error occured while loading posts
+    </div>
+
 </div>

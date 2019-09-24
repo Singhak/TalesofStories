@@ -59,11 +59,11 @@ export class PostEditComponent implements OnInit {
       postDate: Date.now().toString(),
       category: 'Poem'
     }; // pf.value.title;
-    this.postService.createPost(data).then(resp => {
-      console.log(resp);
-    }).catch(error => {
-      console.log(error);
-    });
+    // this.postService.createPost(data).then(resp => {
+    //   console.log(resp);
+    // }).catch(error => {
+    //   console.log(error);
+    // });
 
   }
 

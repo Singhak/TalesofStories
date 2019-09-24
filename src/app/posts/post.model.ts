@@ -1,4 +1,5 @@
 export interface Post {
+    id?: string,
     title: string;
     subtitle?: string;
     postDate: string;
@@ -6,5 +7,4 @@ export interface Post {
     content: string;
     imgPath?: string;
     author?: string;
-    social?: string;
 }
