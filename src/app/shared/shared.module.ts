@@ -4,6 +4,10 @@ import { TrunkTextPipe } from './trunk-text';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../../environments/environment';
 import { SubheaderComponent } from './../header/subheader/subheader.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
@@ -22,7 +26,11 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
                 smartypants: false,
             }
         }
-    }), FormsModule, ReactiveFormsModule],
+    }), FormsModule, ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        AngularFirestoreModule
+    ],
     exports: [
         SubheaderComponent,
         TrunkTextPipe,
@@ -30,7 +38,10 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
         FilterPipe,
         MarkdownModule,
         FormsModule,
-        ReactiveFormsModule
-    ]
+        ReactiveFormsModule,
+        AngularFireModule,
+        AngularFireDatabaseModule,
+        AngularFirestoreModule,
+    ],
 })
 export class SharedModule { }

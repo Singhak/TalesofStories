@@ -5,12 +5,14 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MarkdownService } from 'ngx-markdown';
 import { PostService } from './../post.service';
 import { EditorInstance, EditorOption } from '../../../lib/angular-markdown-editor';
+import { Post } from '../post.model';
 
 @Component({
   templateUrl: './post-edit.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./post-edit.component.css']
 })
+// tslint:disable: align
 export class PostEditComponent implements OnInit {
   bsEditorInstance: EditorInstance;
   markdownText: string;
@@ -20,8 +22,8 @@ export class PostEditComponent implements OnInit {
   id: number;
   @ViewChild('postform', { static: true }) editform: NgForm;
   constructor(private postervice: PostService, private fb: FormBuilder,
-    // tslint:disable-next-line: align
-    private markdownService: MarkdownService, private route: ActivatedRoute) { }
+    private markdownService: MarkdownService, private route: ActivatedRoute,
+    private postService: PostService) { }
 
   ngOnInit() {
     this.editorOptions = {
@@ -50,6 +52,19 @@ export class PostEditComponent implements OnInit {
 
   onSubmit(pf: NgForm) {
     console.log(pf);
+    const data: Post = {
+      title: pf.value.title,
+      subtitle: pf.value.subtitle,
+      content: this.markdownText,
+      postDate: Date.now().toString(),
+      category: 'Poem'
+    }; // pf.value.title;
+    this.postService.createPost(data).then(resp => {
+      console.log(resp);
+    }).catch(error => {
+      console.log(error);
+    });
+
   }
 
   buildForm(markdownText) {
@@ -84,4 +99,6 @@ export class PostEditComponent implements OnInit {
     this.highlight();
     return markedOutput;
   }
+
+
 }

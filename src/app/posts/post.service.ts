@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject} from 'rxjs';
 import { Post } from './post.model';
 
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -100,7 +100,7 @@ export class PostService {
     getPost(id: number): Post {
         return this.posts[id];
     }
-    getPosts(): Post[] {
+    _getPosts(): Post[] {
         return this.posts.slice();
     }
 
@@ -129,30 +129,34 @@ export class PostService {
     ///
 
     createPost(data) {
-        return new Promise<any>((resolve, reject) => {
-            this.firestore
-                .collection('coffeeOrders')
-                .add(data)
-                .then(res => { }, err => reject(err));
-        });
+        console.log('Create Post: ', data);
+
+        return this.firestore.collection('Posts').add(data);
+        // return new Promise<any>((resolve, reject) => {
+        //     this.firestore
+        //         .collection('posts')
+        //         .add(data)
+        //         .then(res => { }, err => reject(err));
+        // });
     }
 
-    _getPosts() {
-        return this.firestore.collection('coffeeOrders').snapshotChanges();
+    getPosts() {
+        return this.firestore.collection('Posts').snapshotChanges();
     }
 
     // tslint:disable: adjacent-overload-signatures
     _updatePost(data) {
+        // this.firestore.doc('Students/' + recordID).update(record);
         return this.firestore
-            .collection('coffeeOrders')
+            .collection('Posts')
             .doc(data.payload.doc.id)
             .set({ completed: true }, { merge: true });
     }
 
-    deleteCoffeeOrder(data) {
+    deleteCoffeeOrder(recordId) {
         return this.firestore
-            .collection('coffeeOrders')
-            .doc(data.payload.doc.id)
+            .collection('Posts')
+            .doc(recordId)
             .delete();
     }
 }
