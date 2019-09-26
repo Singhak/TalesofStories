@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ImageService } from '../image/shared/image.service';
 
 
@@ -8,7 +8,7 @@ import { ImageService } from '../image/shared/image.service';
   styleUrls: ['./image-list.component.css']
 })
 
-export class ImageListComponent implements OnChanges {
+export class ImageListComponent implements OnInit, OnChanges {
   title = 'Recent Photos';
   visibleImages: any[] = [];
 
@@ -16,11 +16,18 @@ export class ImageListComponent implements OnChanges {
   @Input() filterBy = 'all';
 
   constructor(private imageService: ImageService) {
-    this.visibleImages = this.imageService.getImages();
+    imageService.getImagesUrl();
+    // this.visibleImages = this.imageService.getImages();
 
   }
 
+  ngOnInit() {
+    this.imageService.imgUrlNotification.subscribe(() => {
+      this.visibleImages = this.imageService.imgUrls;
+    });
+  }
+
   ngOnChanges() {
-    this.visibleImages = this.imageService.getImages();
+    // this.visibleImages = this.imageService.getImages();
   }
 }

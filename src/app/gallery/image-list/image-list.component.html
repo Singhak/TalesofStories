@@ -9,10 +9,13 @@
         (click)="filterBy='library'">Library</button>
     <ul id="thumbnailsList">
         <!-- List out the images -->
-        <li *ngFor="let image of (visibleImages | imageFilter:filterBy)">
-            <a [routerLink]="[image.id]">
-                <img src="{{image.url}}" class="tn" width="200" height="150">
-            </a>
+        <li *ngFor="let image of visibleImages; let index = index" (deferLoad)="image.url">
+            <ng-container *ngIf="image.show">
+                <a [routerLink]="[index]">
+                    <img src="{{image.url}}" class="tn" width="200" height="150">
+                </a>
+            </ng-container>
+            <app-loading *ngIf="!image.show"></app-loading>
         </li>
     </ul>
 </div>

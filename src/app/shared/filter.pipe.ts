@@ -1,15 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({name: 'imageFilter'})
+@Pipe({ name: 'imageFilter' })
 
 export class FilterPipe implements PipeTransform {
     // take certain items and criteria
     transform(items: any[], criteria: string): any {
-        if(criteria === 'all') {
+        if (criteria === 'all') {
             return items;
         } else {
             return items.filter(item => {
-                return item.category === criteria;
+                if (item.category) {
+                    return item.category.toLowerCase() === criteria.toLowerCase();
+                }
             });
         }
     }

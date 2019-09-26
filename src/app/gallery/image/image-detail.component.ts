@@ -22,7 +22,8 @@ export class ImageDetailComponent implements OnInit {
         // + sign converts id to number, this.route.snapshot provides initial value of route parameter
         this.route.params.subscribe((param: Params) => {
             this.id = +param.id;
-            this.image = this.imageService.getImage(this.id);
+            this.image = this.imageService.getImageUrl(this.id);
+            console.log(this.image);
 
         });
         // this.image = this.imageService.getImage(
@@ -31,12 +32,12 @@ export class ImageDetailComponent implements OnInit {
 
     next() {
         this.id++;
-        this.id = this.id > this.imageService.getImageCount() ? this.id - 1 : this.id;
+        this.id = this.id >= this.imageService.getImageCount() ? this.id - 1 : this.id;
         this.router.navigate(['/arts', this.id]);
     }
     previous() {
         this.id--;
-        this.id = this.id <= 0 ? 1 : this.id;
+        this.id = this.id < 0 ? 0 : this.id;
         this.router.navigate(['/arts', this.id]);
     }
 }

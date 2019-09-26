@@ -1,3 +1,5 @@
+import { Subject } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,8 +7,31 @@ import { Injectable } from '@angular/core';
 })
 export class ImageService {
     visibleImages = [];
-
+    imgNames = [];
+    imgUrls = [];
+    imgUrlNotification = new Subject<any>();
+    constructor(private firestore: AngularFirestore) { }
     // tslint:disable: no-use-before-declare
+    getImagesUrl() {
+        return this.firestore.collection('Images').snapshotChanges().subscribe((res) => {
+            return res.map((rawimg) => {
+                this.imgNames = rawimg.payload.doc.data().gallery;
+                this.imgNames.forEach((name, index) => {
+                    {
+                        this.imgUrls[index] = {
+                            url: `https://raw.githubusercontent.com/Singhak/Images/master/${name}`,
+                            show: false
+                        }
+                    }
+                });
+                this.imgUrlNotification.next(this.imgUrls);
+            });
+        });
+
+    }
+    getImageUrl(index: number) {
+        return this.imgUrls[index];
+    }
     getImages() {
         return this.visibleImages = IMAGES.slice(0);
     }
@@ -16,7 +41,7 @@ export class ImageService {
     }
 
     getImageCount() {
-        return IMAGES.length;
+        return this.imgUrls.length;
     }
 }
 

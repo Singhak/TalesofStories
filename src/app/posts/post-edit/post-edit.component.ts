@@ -21,9 +21,8 @@ export class PostEditComponent implements OnInit {
   editorOptions: EditorOption;
   id: number;
   @ViewChild('postform', { static: true }) editform: NgForm;
-  constructor(private postervice: PostService, private fb: FormBuilder,
-    private markdownService: MarkdownService, private route: ActivatedRoute,
-    private postService: PostService) { }
+  constructor(private fb: FormBuilder, private markdownService: MarkdownService,
+    private route: ActivatedRoute, private postService: PostService) { }
 
   ngOnInit() {
     this.editorOptions = {
@@ -36,7 +35,7 @@ export class PostEditComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.id = params.id;
-        const post = this.postervice.getPost(this.id);
+        const post = this.postService.getPost(this.id);
         console.log(post);
         this.markdownText = post.content;
         setTimeout(() => {
@@ -48,6 +47,7 @@ export class PostEditComponent implements OnInit {
         this.buildForm(this.markdownText);
       }
     });
+
   }
 
   onSubmit(pf: NgForm) {
@@ -57,14 +57,10 @@ export class PostEditComponent implements OnInit {
       subtitle: pf.value.subtitle,
       content: this.markdownText,
       postDate: Date.now().toString(),
-      category: 'Poem'
+      category: pf.value.category,
+      author: pf.value.author
     }; // pf.value.title;
-    // this.postService.createPost(data).then(resp => {
-    //   console.log(resp);
-    // }).catch(error => {
-    //   console.log(error);
-    // });
-
+    this.postService.addNewPost(data);
   }
 
   buildForm(markdownText) {

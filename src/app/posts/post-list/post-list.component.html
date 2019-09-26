@@ -5,19 +5,41 @@
         </div>
     </div>
     <hr>
-    <div>
-        <div class="col-xs-6" *ngFor="let postItem of posts; let i = index" style="margin-bottom: 4px;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button class="btn btn-info btn-info" [class.active]="filterBy=='all'" (click)="filterBy='all'">All</button>
+            <button class="btn btn-info btn-info" [class.active]="filterBy=='boats'"
+                (click)="filterBy='poem'">Poem</button>
+            <button class="btn btn-info btn-info" [class.active]="filterBy=='tale'"
+                (click)="filterBy='scribbled stories'">scribbled stories</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-6" *ngFor="let postItem of (tempPosts | imageFilter: filterBy); let i = index"
+            style="margin-bottom: 4px;">
             <app-post-item [post]="postItem" [index]="i">
             </app-post-item>
         </div>
     </div>
+    <br>
     <div class="loading">
         <app-loading *ngIf="isLoading"></app-loading>
     </div>
 
     <div class="alert alert-danger" *ngIf="isErrorAlert">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" (click)="onClose()">&times;</button>
-        <strong>Error</strong> Some error occured while loading posts
+        <strong>Error</strong> {{errorMsg}}
     </div>
 
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+            <button type="button" class="btn btn-primary pull-right" (click)="onNext()"
+                [disabled]="next >= posts.length">Next</button>
+            <button type="button" class="btn btn-primary pull-right" (click)="onPrev()"
+                [disabled]="prev === 0">Previous</button>
+        </div>
+
+    </div>
 </div>

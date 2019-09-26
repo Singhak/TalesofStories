@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Post } from './post.model';
 import { PostDataStorageService } from './post-data-storage.service';
+// import * as firebase from 'firebase/app';
 
 
 
@@ -10,16 +11,8 @@ import { PostDataStorageService } from './post-data-storage.service';
 })
 export class PostService {
 
-    postNotification = new Subject<Post[]>();
+    postNotification = new BehaviorSubject<Post[]>([]);
     private posts: Post[] = [
-        {
-            title: 'The recipe of the day',
-            subtitle: 'Food from heart',
-            author: 'Anil Kumar',
-            postDate: '20-12-19',
-            category: 'Poem',
-            content: 'This is the recipe that is made by my wife and doe this at home in spare time,'
-        },
         {
             title: 'दो बोल के वो अल्फ़ाज़',
             subtitle: 'ना केहते बनें ना सुनते बनें ',
@@ -98,9 +91,14 @@ export class PostService {
 
     constructor(private postDataService: PostDataStorageService) { }
 
+    isInternetConnected(): boolean {
+        return navigator.onLine;
+    }
+
     getPost(id: number): Post {
         return this.posts[id];
     }
+
     getPosts() {
         this.postDataService.getPosts().subscribe((res) => {
             this.posts = res.map((rawPost) => {
@@ -119,23 +117,24 @@ export class PostService {
     }
 
     addNewPost(post: Post) {
-        this.posts.push(post);
-        this.postNotification.next(this.posts.slice());
+        this.postDataService.createPost(post).then(resp => {
+            // this.getPosts();
+            this.postNotification.next(this.posts.slice());
+            console.log(resp);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     updatePost(index: number, post: Post) {
         this.posts[index] = post;
+        this.postDataService.updatePost(post);
         this.postNotification.next(this.posts.slice());
     }
 
-    deleteRecipe(index: number) {
+    deleteRecipe(index: number, post: Post) {
         this.posts.splice(index, 1);
-        this.postNotification.next(this.posts.slice());
-    }
-
-    setPosts(posts: Post[]) {
-        console.log(posts);
-        this.posts = posts;
+        this.postDataService.deletePost(post.id);
         this.postNotification.next(this.posts.slice());
     }
 }
