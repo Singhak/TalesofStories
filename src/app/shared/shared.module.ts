@@ -1,3 +1,4 @@
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { LoadingComponent } from './loading-component/loading.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
@@ -30,7 +31,8 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
     }), FormsModule, ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        JwSocialButtonsModule
     ],
     exports: [
         SubheaderComponent,
@@ -43,7 +45,8 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
         AngularFireModule,
         AngularFireDatabaseModule,
         AngularFirestoreModule,
-        LoadingComponent
+        LoadingComponent,
+        JwSocialButtonsModule
     ],
 })
 export class SharedModule { }

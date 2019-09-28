@@ -39,6 +39,9 @@ blockquote {
   color: black;
   font-style: italic;
 }
+blockquote p{
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
 hr.small {
   max-width: 100px;
   margin: 15px auto;
@@ -277,7 +280,7 @@ hr.small {
   border-bottom-left-radius: 5px;
 }
 footer {
-  padding: 50px 0 65px;
+  padding: 4px 0 4px;
 }
 footer .list-inline {
   margin: 0;

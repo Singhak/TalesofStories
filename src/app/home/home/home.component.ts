@@ -1,3 +1,5 @@
+import { Post } from './../../posts/post.model';
+import { PostService } from './../../posts/post.service';
 import { Component, OnInit } from '@angular/core';
 import { configuration } from '../../configuration';
 
@@ -9,9 +11,15 @@ import { configuration } from '../../configuration';
 export class HomeComponent implements OnInit {
 
   home = configuration.home;
-  constructor() { }
+  homePosts: Post[];
+  constructor(private postService: PostService) {
+    postService.getPosts();
+  }
 
   ngOnInit() {
+    this.postService.postNotification.subscribe((posts) => {
+      this.homePosts = posts.slice(0, 5);
+    });
   }
 
 }

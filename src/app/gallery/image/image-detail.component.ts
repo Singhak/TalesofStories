@@ -14,7 +14,7 @@ export class ImageDetailComponent implements OnInit {
     id: number;
 
     constructor(private imageService: ImageService, private route: ActivatedRoute, private router: Router) {
-
+        
     }
     ngOnInit() {
         console.log('Image Details');

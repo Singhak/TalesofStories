@@ -66,7 +66,8 @@ export class PostEditComponent implements OnInit {
   buildForm(markdownText) {
     this.templateForm = this.fb.group({
       body: [markdownText],
-      isPreview: [true]
+      isPreview: [true],
+      
     });
   }
 

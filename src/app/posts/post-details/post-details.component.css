@@ -1,3 +1,7 @@
 blockquote {
-    color:black;
+    color: black;
+}
+
+p {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }

@@ -12,16 +12,22 @@ export class ImageService {
     imgUrlNotification = new Subject<any>();
     constructor(private firestore: AngularFirestore) { }
     // tslint:disable: no-use-before-declare
+
+    isInternetConnected(): boolean {
+        return navigator.onLine;
+    }
+
     getImagesUrl() {
         return this.firestore.collection('Images').snapshotChanges().subscribe((res) => {
-            return res.map((rawimg) => {
+            return res.map((rawimg: any) => {
                 this.imgNames = rawimg.payload.doc.data().gallery;
                 this.imgNames.forEach((name, index) => {
                     {
                         this.imgUrls[index] = {
-                            url: `https://raw.githubusercontent.com/Singhak/Images/master/${name}`,
-                            show: false
-                        }
+                            url: `https://raw.githubusercontent.com/Singhak/Images/master/paints/${name.name}`,
+                            show: false,
+                            category: name.category
+                        };
                     }
                 });
                 this.imgUrlNotification.next(this.imgUrls);

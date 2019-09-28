@@ -1,3 +1,4 @@
+import { configuration } from './../configuration';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Post } from './post.model';
@@ -102,18 +103,31 @@ export class PostService {
     getPosts() {
         this.postDataService.getPosts().subscribe((res) => {
             this.posts = res.map((rawPost) => {
+                const post = rawPost.payload.doc.data() as Post;
                 return {
                     id: rawPost.payload.doc.id,
-                    content: rawPost.payload.doc.data().content,
-                    subtitle: rawPost.payload.doc.data().subtitle,
-                    postDate: rawPost.payload.doc.data().postDate,
-                    title: rawPost.payload.doc.data().title,
-                    author: rawPost.payload.doc.data().author,
-                    category: rawPost.payload.doc.data().category
+                    content: post.content,
+                    subtitle: post.subtitle,
+                    postDate: post.postDate,
+                    title: post.title,
+                    author: post.author,
+                    category: post.category,
+                    social: this.getAuthorSocial(post.author)
                 };
             });
             this.postNotification.next(this.posts.slice());
         });
+    }
+
+    private getAuthorSocial(name: string) {
+
+        const social =
+            configuration.aboutus.authors.find((n) => {
+                return n.name === name;
+            });
+        console.log(social);
+
+        return social ? social.social : '';
     }
 
     addNewPost(post: Post) {

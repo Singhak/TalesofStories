@@ -2,7 +2,7 @@
     <a [routerLink]="['/posts',index]" style="cursor: pointer;" routerLinkActive="active"
         class="list-group-item clearfix">
         <span class="media-left media-middle">
-            <img src="../../../assets/img/story-thumnail.png" alt="...">
+            <!-- <img src="../../../assets/img/defaults/story-thumnail.png" alt="..."> -->
         </span>
         <div class="media-body">
             <h4 class="list-group-item-heading">{{post.title}}</h4>
@@ -10,7 +10,8 @@
             <!-- <markdown class="small text-muted" [data]="post.content|shortenlen:25"></markdown> -->
             <!-- <div class="small text-muted"><i>{{post.content|shortenlen:50}}</i></div> -->
             <br>
-            <span class="small">Posted by <a href="#">{{post.author}}</a> {{post.postDate | date}}</span>
+            <span class="small">Posted by <a href="{{post.social}}" target="_blank">{{post.author}}</a>
+                {{post.postDate | date}}</span>
             <!-- <span class="pull-right small text-info">Posted by: <i>Anil kumar</i></span> -->
         </div>
     </a>

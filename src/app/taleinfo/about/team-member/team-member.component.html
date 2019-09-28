@@ -1,10 +1,10 @@
-<a href="/profiles/Kunalahuja15">
-    <div class="media">
-        <img alt="Kunal Ahuja" class="align-self-center mr-3 img-circle "
-            src="https://codecademy-production.s3.amazonaws.com/profile_thumbnail/5d5c3418f18e2868b600026a_743046648.jpg?AWSAccessKeyId=AKIAJKZ7QVQFD72XNJ3Q&amp;Expires=1569249582&amp;Signature=KunYGsUgl75BYswjybh%2BOLvSxbc%3D">
+<a href="{{author.social ? author.social : 'https://www.facebook.com/1step2wardsLife/' }}" target="_blank">
+    <div class="media" style="text-align: center;">
+        <img alt={{author.name}} class="align-self-center mr-3 img-circle"
+            src="../../../../assets/img/authors/{{author.img}}">
         <div class="media-body">
-            <p class="mt-0"><strong>Kunal Ahuja</strong></p>
-            <p class="mb-0">Chief of Staff</p>
+            <p class="mt-0"><strong>{{author.name}}</strong></p>
+            <p class="mb-0">{{author.profession}}</p>
         </div>
     </div>
 </a>

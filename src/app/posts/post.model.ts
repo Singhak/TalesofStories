@@ -7,4 +7,5 @@ export interface Post {
     content: string;
     imgPath?: string;
     author?: string;
+    social?: string;
 }

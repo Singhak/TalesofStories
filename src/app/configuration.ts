@@ -3,32 +3,44 @@ export const configuration = {
     home: {
         heading: 'Tales of Stories',
         subheading: 'Thoughts comes from heart',
-        img: '../assets/img/home-bg.jpg'
+        img: '../assets/img/defaults/home-bg.jpg'
     },
     aboutus: {
         heading: 'About us',
         subheading: 'This is what WE do',
-        img: '../assets/img/about-bg.jpg'
+        img: '../assets/img/defaults/about-bg.jpg',
+        info: ` We are bunch of people who try to bring out our inner thought in the form of art, stories or poem
+        to serve you. If you like our work please share it and spread happiness.`,
+        authors: [
+            {
+                name: 'Divyanshu Mishra',
+                social: 'https://www.facebook.com/divyanshu.mishra.370',
+                img: 'divyanshu_mishra.jpg',
+                profession: 'Engineer Writer'
+            },
+            {
+                name: 'Anubhav Shankar',
+                social: '',
+                img: 'anubhav_shankar.jpg',
+                profession: 'Engineer Writer'
+            },
+            {
+                name: 'Smita Singh',
+                social: '',
+                img: 'smita_singh.jpg',
+                profession: 'Engineer Artist'
+            },
+            {
+                name: 'Anil Singh',
+                social: '',
+                img: 'anil_singh.jpg',
+                profession: 'Engineer'
+            },
+        ]
     },
     contactus: {
         heading: 'Contact us',
         subheading: 'Have questions? We have answers (maybe).',
-        img: '../assets/img/contact-us.jpg'
-    },
-    clients: {
-        tagline: 'TRUST',
-        title: 'Companies who use our services',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam!',
-        companies: [
-            { name: 'Tree', weblink: 'company-logo1.png', logo: 'company-logo1.png' },
-            { name: 'Fingerprint', weblink: 'company-logo2.png', logo: 'company-logo2.png' },
-            { name: 'The Man', weblink: 'company-logo3.png', logo: 'company-logo3.png' },
-            { name: 'Mustache', weblink: 'company-logo4.png', logo: 'company-logo4.png' },
-            { name: 'Goat', weblink: 'company-logo5.png', logo: 'company-logo5.png' },
-            { name: 'Justice', weblink: 'company-logo6.png', logo: 'company-logo6.png' },
-            { name: 'Ball', weblink: 'company-logo7.png', logo: 'company-logo7.png' },
-            { name: 'Cold', weblink: 'company-logo8.png', logo: 'company-logo8.png' },
-            { name: 'Cold', weblink: 'company-logo9.png', logo: 'company-logo9.png' },
-        ]
-    },
+        img: '../assets/img/defaults/contact-us.jpg'
+    }
 };

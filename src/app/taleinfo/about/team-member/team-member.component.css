@@ -1,4 +1,14 @@
 p {
     padding-left: 8px;
+    margin-block-end: 4px;
+    margin-block-start: 4px;
 }
 
+img {
+    width: 140px;
+    height: 140;
+}
+
+a {
+    display: table-caption;
+}

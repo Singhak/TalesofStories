@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class PostDetailsComponent implements OnInit {
 
   post: Post;
-  defautImg = '../../../assets/img/postImage.jpg';
+  defautImg = '../../../assets/img/defaults/article.jpg';
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 
   ngOnInit() {

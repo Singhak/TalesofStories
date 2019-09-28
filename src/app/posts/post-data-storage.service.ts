@@ -13,6 +13,7 @@ export class PostDataStorageService {
     return this.firestore.collection('Posts').add(data);
   }
 
+
   getPosts() {
     return this.firestore.collection('Posts').snapshotChanges();
   }
