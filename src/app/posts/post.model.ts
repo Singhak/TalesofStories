@@ -8,4 +8,6 @@ export interface Post {
     imgPath?: string;
     author?: string;
     social?: string;
+    imgOwner?: string;
+    imgId?: string;
 }

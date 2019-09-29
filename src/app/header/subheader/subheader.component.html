@@ -1,4 +1,4 @@
-<header class="intro-header" [style.background-image]="'url(' + img + ')'" style="max-height: 500px;">
+<header class="intro-header" [style.background-image]="'url(' + img + ')'" style="max-height: 600px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -11,8 +11,13 @@
                         {{date|date}}</span>
                 </div>
             </div>
+
+            <div class="col-xs-12 col-lg-12 label" style="text-align: right;" *ngIf="imgOwner">
+                Image by <a target="_blank"
+                    href="https://pixabay.com/users/{{imgOwner}}?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content={{imgId}}">{{imgOwner.substr(0, imgOwner.lastIndexOf('-')).trim()}}
+                </a> from <a target="_blank"
+                    href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content={{imgId}}">Pixabay</a>
+            </div>
         </div>
     </div>
 </header>
-
-<!-- Image by <a href="https://pixabay.com/users/Bru-nO-1161770/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2163258">Bruno Glätsch</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2163258">Pixabay</a> -->

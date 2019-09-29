@@ -150,7 +150,7 @@ hr.small {
 .intro-header {
   background-color: #777777;
   background: no-repeat center center;
-  background-attachment: scroll;
+  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;

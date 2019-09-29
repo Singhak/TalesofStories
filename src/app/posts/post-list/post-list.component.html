@@ -15,10 +15,10 @@
         </div>
     </div>
     <br>
-    <div class="row">
+    <div class="row" *ngIf="tempPosts">
         <div class="col-xs-6" *ngFor="let postItem of (tempPosts | imageFilter: filterBy); let i = index"
             style="margin-bottom: 4px;">
-            <app-post-item [post]="postItem" [index]="i">
+            <app-post-item [post]="postItem" [index]="i + prev">
             </app-post-item>
         </div>
     </div>
@@ -32,14 +32,12 @@
         <strong>Error</strong> {{errorMsg}}
     </div>
 
-    <div class="row">
-
+    <div class="row" *ngIf="tempPosts && tempPosts.length">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
             <button type="button" class="btn btn-primary pull-right" (click)="onNext()"
                 [disabled]="next >= posts.length">Next</button>
             <button type="button" class="btn btn-primary pull-right" (click)="onPrev()"
                 [disabled]="prev === 0">Previous</button>
         </div>
-
     </div>
 </div>

@@ -58,16 +58,19 @@ export class PostEditComponent implements OnInit {
       content: this.markdownText,
       postDate: Date.now().toString(),
       category: pf.value.category,
-      author: pf.value.author
+      author: pf.value.author,
+      imgPath: pf.value.imgpath ? pf.value.imgpath : ''
     }; // pf.value.title;
     this.postService.addNewPost(data);
+    this.editform.form.reset();
+    this.templateForm.reset();
   }
 
   buildForm(markdownText) {
     this.templateForm = this.fb.group({
       body: [markdownText],
       isPreview: [true],
-      
+
     });
   }
 

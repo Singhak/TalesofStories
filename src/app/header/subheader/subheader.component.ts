@@ -26,6 +26,8 @@ export class SubheaderComponent implements OnInit {
   @Input() author?: string;
   @Input() date?: string;
   @Input() social?: string;
+  @Input() imgId?: string;
+  @Input() imgOwner?: string;
   constructor() { }
 
   ngOnInit() {

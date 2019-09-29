@@ -12,9 +12,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../../environments/environment';
 import { SubheaderComponent } from './../header/subheader/subheader.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { CeiboShare } from 'ng2-social-share';
+import { SocialShareComponent } from './social-share/social-share.component';
 
 @NgModule({
-    declarations: [SubheaderComponent, TrunkTextPipe, FilterPipe, LoadingComponent],
+    declarations: [SubheaderComponent, TrunkTextPipe, FilterPipe, LoadingComponent, 
+        CeiboShare, SocialShareComponent, SocialShareComponent],
     imports: [CommonModule, MarkdownModule.forRoot({
         markedOptions: {
             provide: MarkedOptions,
@@ -46,7 +49,9 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
         AngularFireDatabaseModule,
         AngularFirestoreModule,
         LoadingComponent,
-        JwSocialButtonsModule
+        JwSocialButtonsModule,
+        CeiboShare,
+        SocialShareComponent
     ],
 })
 export class SharedModule { }

@@ -13,30 +13,38 @@ export class PostListComponent implements OnInit {
   prev = 0;
   next = 0;
   posts: Post[];
-  tempPosts: Post[];
+  tempPosts: Post[] = [];
   isLoading = false;
   isErrorAlert = false;
   errorMsg = 'Some error occured while loading posts';
   isConneted = true;
   constructor(private postService: PostService) { }
   filterBy = 'all';
+  
   ngOnInit() {
     this.isLoading = true;
     this.isConneted = this.postService.isInternetConnected();
     if (this.isConneted) {
       this.postService.getPosts();
     } else {
+      this.isLoading = false;
+      this.isErrorAlert = true;
       this.errorMsg = 'There is no internet connection';
     }
     this.postService.postNotification.subscribe((posts) => {
-      this.isLoading = false;
-      this.isErrorAlert = false;
-      this.posts = posts;
-      this.next = this.maxLen;
-      this.tempPosts = this.posts.slice(0, this.maxLen);
-      if (!this.posts.length) {
-        this.isErrorAlert = true;
+      if (posts && posts.length) {
+        this.isLoading = false;
+        this.isErrorAlert = false;
+        this.posts = posts;
+        this.next = this.maxLen;
+        this.tempPosts = this.posts.slice(0, this.maxLen);
+      } else {
+        if (posts) {
+          this.isLoading = false;
+          this.isErrorAlert = true;
+        }
       }
+
     });
   }
 

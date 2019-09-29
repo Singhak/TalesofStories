@@ -32,8 +32,7 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-css.min.js",
               "node_modules/prismjs/components/prism-javascript.min.js",
-              "node_modules/prismjs/components/prism-typescript.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/prismjs/components/prism-typescript.min.js"
             ]
           },
           "configurations": {

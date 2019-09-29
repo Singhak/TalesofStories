@@ -1,11 +1,13 @@
-<app-subheader [img]="post.imgPath" [heading]="post.title" [subheading]="post.subtitle" [social]="post.social"
-    [author]="post.author" [date]="post.postDate">
+<app-subheader *ngIf="post" [img]="post.imgPath" [heading]="post.title" [subheading]="post.subtitle"
+    [social]="post.social" [author]="post.author" [date]="post.postDate" [imgOwner]="post.imgOwner"
+    [imgId]="post.imgId">
 </app-subheader>
 <div class="container">
     <div class="row">
-        <fb-like url="https://aliendeveloper.com"></fb-like>
+        <fb-like url="http://talesoftales.com/"></fb-like>
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <markdown [data]="post.content"></markdown>
         </div>
     </div>
+    <app-social-share></app-social-share>
 </div>

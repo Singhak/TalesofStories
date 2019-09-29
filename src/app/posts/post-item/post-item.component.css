@@ -16,6 +16,7 @@ img {
 
 h4 {
     font-size: 18px;
+    line-height: 1.4;
 }
 
 span.subheading {
@@ -27,4 +28,8 @@ span.small {
     display: block;
     float: right;
     font-style: oblique;
+}
+
+.list-group-item-heading {
+    padding-bottom: 0px;
 }

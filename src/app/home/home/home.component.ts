@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.postService.postNotification.subscribe((posts) => {
-      this.homePosts = posts.slice(0, 5);
+      if (posts) {
+        this.homePosts = posts.slice(0, 5);
+      }
     });
   }
 
