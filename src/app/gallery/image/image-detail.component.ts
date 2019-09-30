@@ -12,19 +12,16 @@ import { ImageService } from './shared/image.service';
 export class ImageDetailComponent implements OnInit {
     image: any;
     id: number;
-
+    desc = 'Checkout our latest panting and sketches at our web site.';
+    shareUrl = '';
     constructor(private imageService: ImageService, private route: ActivatedRoute, private router: Router) {
-        
     }
     ngOnInit() {
         console.log('Image Details');
-
         // + sign converts id to number, this.route.snapshot provides initial value of route parameter
         this.route.params.subscribe((param: Params) => {
             this.id = +param.id;
             this.image = this.imageService.getImageUrl(this.id);
-            console.log(this.image);
-
         });
         // this.image = this.imageService.getImage(
         // +this.route.snapshot.params['id']);

@@ -9,5 +9,5 @@
             <markdown [data]="post.content"></markdown>
         </div>
     </div>
-    <app-social-share></app-social-share>
+    <app-social-share *ngIf="post" [imgPath]="post.imgPath" [desc]="decs" [shareUrl]="shareUrl"></app-social-share>
 </div>

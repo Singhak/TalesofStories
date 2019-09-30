@@ -13,6 +13,9 @@
     <!-- <span class="sr-only">Next</span> -->
 </a>
 <!-- Caption -->
-<div class="outline result-preview">
-    {{ image.caption }}
+<br>
+<div class=" row">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <app-social-share *ngIf="image" [imgPath]="image.url" [desc]="desc" [shareUrl]="shareUrl"></app-social-share>
+    </div>
 </div>

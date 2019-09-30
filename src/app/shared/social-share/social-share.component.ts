@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SocialShareComponent implements OnInit {
 
   @Input() shareUrl = 'https://talesoftales.com';
+  @Input() desc;
+  @Input() imgPath;
   constructor() { }
 
   ngOnInit() {
