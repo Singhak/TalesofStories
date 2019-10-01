@@ -1,23 +1,22 @@
-import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { LoadingComponent } from './loading-component/loading.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
 import { TrunkTextPipe } from './trunk-text';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../../environments/environment';
-import { SubheaderComponent } from './../header/subheader/subheader.component';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
-import { CeiboShare } from 'ng2-social-share';
+import { SubheaderComponent } from './../header/subheader/subheader.component';
 import { SocialShareComponent } from './social-share/social-share.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-    declarations: [SubheaderComponent, TrunkTextPipe, FilterPipe, LoadingComponent, 
-        CeiboShare, SocialShareComponent, SocialShareComponent],
+    declarations: [SubheaderComponent, TrunkTextPipe, FilterPipe, LoadingComponent,
+        SocialShareComponent, SocialShareComponent],
     imports: [CommonModule, MarkdownModule.forRoot({
         markedOptions: {
             provide: MarkedOptions,
@@ -35,7 +34,8 @@ import { SocialShareComponent } from './social-share/social-share.component';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
         AngularFirestoreModule,
-        JwSocialButtonsModule
+        HttpClientModule,       // (Required) For share counts
+        ShareButtonsModule
     ],
     exports: [
         SubheaderComponent,
@@ -49,8 +49,6 @@ import { SocialShareComponent } from './social-share/social-share.component';
         AngularFireDatabaseModule,
         AngularFirestoreModule,
         LoadingComponent,
-        JwSocialButtonsModule,
-        CeiboShare,
         SocialShareComponent
     ],
 })

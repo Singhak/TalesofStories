@@ -1,14 +1,10 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <button ceiboShare [twitter]="{url:shareUrl, text:desc, 
-            hashtags:'poem, painting, stories, arts, love, breakup, blog, shayri, gazal, tales, tale, story'}"
-            type="button" class="btn btn-info pull-right">Twitter</button>
-        <button ceiboShare [linkedIn]="{url:shareUrl}" type="button" class="btn pull-right"
-            style="background-color: #0077B5; color: #fff;">Linkedin</button>
-        <button ceiboShare [facebook]="{u: shareUrl}" type="button" class="btn btn-primary pull-right">Facebook</button>
-        <button ceiboShare [pinterest]="{url:shareUrl, media: imgPath, description:desc}" type="button"
-            class="btn btn-danger pull-right">Pinterest</button>
-        <span class="label pull-right">Share via</span>
 
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <share-buttons style="float: right;" [theme]="'modern-dark'"
+            [include]="['facebook','twitter','linkedin','pinterest','reddit','messenger','whatsapp']" [showCount]="true"
+            [url]="shareUrl" [title]="'Tales Of Tales'" [description]="desc" [image]="imgPath" [tags]="hasTags">
+        </share-buttons>
+        <span class="label pull-right">Share via</span>
     </div>
 </div>
