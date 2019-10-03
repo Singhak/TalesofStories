@@ -27,12 +27,9 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap-markdown/js/bootstrap-markdown.js",
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-css.min.js",
-              "node_modules/prismjs/components/prism-javascript.min.js",
-              "node_modules/prismjs/components/prism-typescript.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
