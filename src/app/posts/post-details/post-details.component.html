@@ -1,10 +1,15 @@
+<div class="row">
+    <div *ngIf="!post" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center">
+        <app-loading></app-loading>
+    </div>
+</div>
+
 <app-subheader *ngIf="post" [img]="post.imgPath" [heading]="post.title" [subheading]="post.subtitle"
     [social]="post.social" [author]="post.author" [date]="post.postDate" [imgOwner]="post.imgOwner"
     [imgId]="post.imgId">
 </app-subheader>
 <div class="container">
     <div class="row">
-        <!-- <fb-like url="http://talesoftales.com/"></fb-like> -->
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <markdown [data]="post.content"></markdown>
         </div>

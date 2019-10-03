@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: 'arts', component: GalleryComponent,
+        path: '', component: GalleryComponent,
         children: [
             {
                 path: '', component: ImageListComponent

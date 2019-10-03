@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, OnDestroy } from '@angular/core';
 import { ImageService } from '../image/shared/image.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,14 +9,15 @@ import { ImageService } from '../image/shared/image.service';
   styleUrls: ['./image-list.component.css']
 })
 
-export class ImageListComponent implements OnInit, OnChanges {
+export class ImageListComponent implements OnInit, OnChanges, OnDestroy {
   title = 'Recent Photos';
   visibleImages: any[] = [];
   images: any[] = [];
-  maxLen = 15;
+  maxLen = 9;
   prev = 0;
   next = 0;
   errorMsg = '';
+  imageSubscription: Subscription;
   // Create an input
   @Input() filterBy = 'all';
 
@@ -32,7 +34,7 @@ export class ImageListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.imageService.imgUrlNotification.subscribe(() => {
+    this.imageSubscription = this.imageService.imgUrlNotification.subscribe(() => {
       console.log(this.imageService.imgUrls);
       this.images = this.imageService.imgUrls;
       this.next = this.maxLen;
@@ -57,5 +59,9 @@ export class ImageListComponent implements OnInit, OnChanges {
     this.prev = this.prev + this.maxLen;
     this.next = this.next + this.maxLen;
     this.visibleImages = this.images.slice(this.prev, this.next);
+  }
+
+  ngOnDestroy() {
+    this.imageSubscription.unsubscribe();
   }
 }

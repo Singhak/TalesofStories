@@ -1,13 +1,14 @@
 import { PostService } from './../post.service';
 import { Post } from './../post.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, OnDestroy {
 
   maxLen = 6;
   prev = 0;
@@ -20,7 +21,8 @@ export class PostListComponent implements OnInit {
   isConneted = true;
   constructor(private postService: PostService) { }
   filterBy = 'all';
-  
+  postSubscription: Subscription;
+
   ngOnInit() {
     this.isLoading = true;
     this.isConneted = this.postService.isInternetConnected();
@@ -31,7 +33,7 @@ export class PostListComponent implements OnInit {
       this.isErrorAlert = true;
       this.errorMsg = 'There is no internet connection';
     }
-    this.postService.postNotification.subscribe((posts) => {
+    this.postSubscription = this.postService.postNotification.subscribe((posts) => {
       if (posts && posts.length) {
         this.isLoading = false;
         this.isErrorAlert = false;
@@ -62,6 +64,10 @@ export class PostListComponent implements OnInit {
 
   onClose() {
     this.isErrorAlert = false;
+  }
+
+  ngOnDestroy() {
+    this.postSubscription.unsubscribe();
   }
 }
 

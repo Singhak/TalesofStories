@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ImageService } from './shared/image.service';
+import { Subscription } from 'rxjs';
+import { ViewCompileResult } from '@angular/compiler/src/view_compiler/view_compiler';
 
 @Component({
     // selector: 'app-image-detail',
@@ -9,7 +11,8 @@ import { ImageService } from './shared/image.service';
     styleUrls: ['./image-detail.component.css']
 })
 
-export class ImageDetailComponent implements OnInit {
+export class ImageDetailComponent implements OnInit, OnDestroy {
+    imageSubscription: Subscription;
     image: any;
     id: number;
     desc = 'Checkout our latest panting and sketches at our web site.';
@@ -20,11 +23,19 @@ export class ImageDetailComponent implements OnInit {
         console.log('Image Details');
         // + sign converts id to number, this.route.snapshot provides initial value of route parameter
         this.route.params.subscribe((param: Params) => {
+            this.image = undefined;
             this.id = +param.id;
             this.image = this.imageService.getImageUrl(this.id);
+            if (!this.image) {
+                this.imageService.getImagesUrl();
+            }
         });
-        // this.image = this.imageService.getImage(
-        // +this.route.snapshot.params['id']);
+
+        this.imageSubscription = this.imageService.imgUrlNotification.subscribe((imgUrl) => {
+            if (!this.image) {
+                this.image = imgUrl[this.id];
+            }
+        });
     }
 
     next() {
@@ -36,5 +47,9 @@ export class ImageDetailComponent implements OnInit {
         this.id--;
         this.id = this.id < 0 ? 0 : this.id;
         this.router.navigate(['/arts', this.id]);
+    }
+
+    ngOnDestroy() {
+        this.imageSubscription.unsubscribe();
     }
 }

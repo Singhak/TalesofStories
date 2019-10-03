@@ -8,27 +8,25 @@
         (click)="filterBy='painting'">Painting</button>
     <button class="btn btn-info btn-info" [class.active]="filterBy=='photography'"
         (click)="filterBy='photography'">Photography</button>
-    <ul id="thumbnailsList">
-        <app-loading *ngIf="!visibleImages.length && !errorMsg.length"></app-loading>
-        <li *ngFor="let image of (visibleImages | imageFilter:filterBy); let index = index"
-            (deferLoad)="image.show = true">
-            <ng-container>
-                <a [routerLink]="[index + prev]">
-                    <img src="{{image.url}}" class="tn" width="200" height="150">
-                </a>
-            </ng-container>
-        </li>
-        <div class="alert alert-danger" *ngIf="errorMsg.length">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Error</strong> {{errorMsg}}
-        </div>
-    </ul>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-            <button type="button" class="btn btn-primary pull-right" (click)="onNext()"
-                [disabled]="next >= images.length">Next</button>
-            <button type="button" class="btn btn-primary pull-right" (click)="onPrev()"
-                [disabled]="prev === 0">Previous</button>
-        </div>
+</div>
+<div id="photos" class="row text-center text-lg-left">
+    <app-loading *ngIf="!visibleImages.length && !errorMsg.length"></app-loading>
+    <div *ngFor="let image of (visibleImages | imageFilter:filterBy); let index = index"
+        (deferLoad)="image.show = true">
+        <a [routerLink]="[index + prev]">
+            <img src="{{image.url}}" class="img-thumbnail tn">
+        </a>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMsg.length">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Error</strong> {{errorMsg}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <button type="button" class="btn btn-primary pull-right" (click)="onNext()"
+            [disabled]="next >= images.length">Next</button>
+        <button type="button" class="btn btn-primary pull-right" (click)="onPrev()"
+            [disabled]="prev === 0">Previous</button>
     </div>
 </div>

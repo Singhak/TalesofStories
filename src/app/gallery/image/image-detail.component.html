@@ -1,7 +1,14 @@
-<div (deferLoad)="image.show = true">
-    <ng-container *ngIf="image.show">
-        <img [src]="image.url" class="img-responsive img-container" alt="Image">
-    </ng-container>
+<div class="container">
+
+    <div class="row">
+        <div *ngIf="!image" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center">
+            <app-loading></app-loading>
+        </div>
+    </div>
+
+    <!-- <ng-container *ngIf="image.show"> -->
+    <img *ngIf="image" [src]="image.url" class="img-responsive img-container" alt="Image">
+    <!-- </ng-container> -->
 </div>
 
 <a class="left carousel-control" (click)="previous()" data-slide="prev">
