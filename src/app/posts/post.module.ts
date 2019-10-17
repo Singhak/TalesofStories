@@ -20,6 +20,7 @@ import { PostItemComponent } from './post-item/post-item.component';
         PostDetailsComponent,
         PostListComponent,
         PostItemComponent,
+        PostEditComponent
     ],
     imports: [
         SharedModule,

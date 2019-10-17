@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PostDetailsComponent } from './post-details/post-details.component';
-// import { PostEditComponent } from './post-edit/post-edit.component';
+import { PostEditComponent } from './post-edit/post-edit.component';
 import { PostListComponent } from './post-list/post-list.component';
 
 const routes: Routes = [
@@ -12,8 +12,8 @@ const routes: Routes = [
     component: PostsComponent,
     children: [
       { path: '', component: PostListComponent },
-      // { path: 'new', component: PostEditComponent },
-      // { path: ':id/edit', component: PostEditComponent },
+      { path: 'new', component: PostEditComponent },
+      { path: ':id/edit', component: PostEditComponent },
       { path: ':id', component: PostDetailsComponent },
     ]
   }

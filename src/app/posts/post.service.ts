@@ -61,6 +61,7 @@ export class PostService {
         }
         return '';
     }
+
     private getAuthorSocial(name: string) {
         const social =
             configuration.aboutus.authors.find((n) => {
